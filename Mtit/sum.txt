@@ -1,0 +1,38 @@
+package pastpaper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+interface IgradeService{
+	public String checkGrade(List<Integer> listOfMarks);
+}
+
+public class Q1 {
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> listOfMarks = new ArrayList<Integer>();
+		listOfMarks.add(85);
+		listOfMarks.add(75);
+		listOfMarks.add(60);
+		listOfMarks.add(80);
+		listOfMarks.add(100);
+		
+		IgradeService igradeService = (marks) -> {
+			int avg = (marks.stream().mapToInt(Integer::intValue).sum())/(marks.size());
+		
+			if(avg >= 80.0) {
+				return "Best";
+			}else if((avg<80.0) && (avg >= 60.0)) {
+				return "Merit";
+			}else if((avg<60.0) && (avg >= 45.0)) {
+				return "Pass";
+			}else {
+				return "Fail";
+			}	
+		};
+		
+		System.out.println("Result is = " + igradeService.checkGrade(listOfMarks));
+		
+	}
+
+}

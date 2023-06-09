@@ -1,0 +1,16 @@
+package pastpaper;
+
+import java.util.Arrays;
+
+public class PartB {
+
+	public static void main(String[] args) {
+		
+		String[] stringArray = {"sss","rrr","aaa","uuu","jjj","ppp"};
+		
+		Arrays.sort(stringArray, String::compareToIgnoreCase);
+		Arrays.asList(stringArray).forEach(System.out::println);
+		
+	}
+
+}

@@ -1,0 +1,77 @@
+package pastpaper;
+
+import java.io.File;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+public class Pptx {
+	
+	public static void main(String[] args) throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {
+		Pptx xml  = new Pptx();
+		xml.buildXml();
+	}
+	
+	public Document createDucument() throws ParserConfigurationException {
+		return DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+	}
+	
+	public Element createElement(Document document, String Value) {
+		return document.createElement(Value);
+	}
+	
+	public Attr createAttribute(Document document, String type, String value) {
+		Attr attribute = document.createAttribute(type);
+		attribute.setValue(value);
+		return attribute;
+	}
+	
+	public Element appendChild(Document document,Element element, String value) {
+		element.appendChild(document.createTextNode(value));
+		return element;
+	}
+	
+	public Element setAttribute(Element element, Attr attribute) {
+		element.setAttributeNode(attribute);
+		return element;
+	}
+	
+	public void transformToXml(Document document) throws TransformerFactoryConfigurationError, TransformerException {
+		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		DOMSource source = new DOMSource(document);
+		transformer.transform(source, new StreamResult(new File("cars.xml")));
+		transformer.transform(source, new StreamResult(System.out));
+	}
+	
+	
+	public void buildXml() throws ParserConfigurationException, TransformerFactoryConfigurationError, TransformerException {
+		Document document = createDucument();
+		
+		Element car = createElement(document, "cars");
+		document.appendChild(car);
+		
+		Element supercars = createElement(document, "supercars");
+		car.appendChild(supercars);
+		
+		setAttribute(supercars, createAttribute(document, "company", "Ferrari"));
+		
+		//one
+		supercars.appendChild(appendChild(document, setAttribute(createElement(document, "carname"), createAttribute(document, "type", "formula one")), "Ferrari 101"));
+		
+		//two
+		supercars.appendChild(appendChild(document, setAttribute(createElement(document, "carname"), createAttribute(document, "type", "sports")), "Ferrari 202"));
+
+		transformToXml(document);
+	}
+
+}
