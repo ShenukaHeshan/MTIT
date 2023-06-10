@@ -11,6 +11,18 @@ public class PartB {
 		Arrays.sort(stringArray, String::compareToIgnoreCase);
 		Arrays.asList(stringArray).forEach(System.out::println);
 		
+		
+		String{] stringArray = { nss5'., "rrR.', Waaa.., Wuu.I, mJjj.., "PpP", "yyy. };
+		
+		Arrays.Sort.( stringArray new Comparator<String>() {
+		§ngh,Ier!`ic?e
+		public init coapare(Stririg valuel, String value2) i
+		return ``taluel. co!npareTolgnorecase( \fahie2) ;
+		));
+		for (String value : stringArray) {
+		System.out.println(`/Slue);
+		)
+		
 	}
 
 }
